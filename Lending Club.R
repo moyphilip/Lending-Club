@@ -231,7 +231,7 @@ confusionMatrix(c5.0costpre, reference = testData[,ncol(testData)], positive = "
 impCoefglm <- train(statusClass ~.,
                         data = trainData,
                         method = "glm",
-                        trControl = glmControl,
+                        trControl = otherControl,
                         metric = "ROC",
                         preProcess= c("center","scale")
                     
