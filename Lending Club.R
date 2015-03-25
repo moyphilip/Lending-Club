@@ -220,7 +220,7 @@ c5.0cost <- train(statusClass ~ .,
                 metric = "negpre"
              )
 
-# save(c5.0cost, file ="./c50Cost5Trial1.RDS" )
+#save(c5.0cost, file ="./c50Cost5Trial1.RDS" )
 
 c5.0costpre <- predict(c5.0cost, testData[,-ncol(testData)])
 confusionMatrix(c5.0costpre, reference = testData[,ncol(testData)], positive = "Default")
@@ -237,7 +237,7 @@ impCoefglm <- train(statusClass ~.,
                     
                  ) 
 
-# save(impCoefglm, file = "./impCoefglm.RDS")
+#save(impCoefglm, file = "./impCoefglm.RDS")
 
 impCoefglmpre <- predict(impCoefglm, testData[,-ncol(testData)])
 
@@ -258,7 +258,7 @@ impCoefgbm <- train(statusClass ~.,
                         shrinkage = 0.1)
                 ) 
 
-# save(impCoefgbm, file = "./impCoefgbm.RDS")
+#save(impCoefgbm, file = "./impCoefgbm.RDS")
 
 impCoefgbmpre <- predict(impCoefgbm, testData[,-ncol(testData)])
 confusionMatrix(impCoefgbmpre, reference = testData[,ncol(testData)], positive = "Default")
