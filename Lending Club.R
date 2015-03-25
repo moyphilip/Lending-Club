@@ -96,7 +96,7 @@ data <- data %>%
 
 data <- na.omit(data)
 
-# save(data, file = "/data.RDS")
+# save(data, file = "./data.RDS")
 
 #Exploratory Analysis ####
 
@@ -147,7 +147,7 @@ impRf<- train(statusClass ~ .,
                 metric = "ROC"
                  )
 
-# save(impRf, file = "/impRf.RDS")
+# save(impRf, file = "./impRf.RDS")
 
 varImpObj <- varImp(impRf)
 plot(varImpObj, main = "Top 50 Important Variables", top = 50)
@@ -161,7 +161,7 @@ impCoefs <- impCoefs[impCoefs != "desclength"]
 impCoefsData <- data[,impCoefs]
 impCoefsData <- cbind(impCoefsData,statusClass = data[,ncol(data)])
 
-# save(impCoefsData,file= "/impCoefsData.RDS")
+# save(impCoefsData,file= "./impCoefsData.RDS")
 
 
 #Machine Learning train data, test data, and train control ####
@@ -193,7 +193,7 @@ c5.0 <- train(statusClass ~ .,
                 metric = "ROC"
              )
 
-# save(c5.0, file ="/c50.RDS")
+# save(c5.0, file ="./c50.RDS")
 
 c5.0pre <- predict(c5.0, testData[,-ncol(testData)])
 confusionMatrix(c5.0pre, reference = testData[,ncol(testData)], positive = "Default")
@@ -220,7 +220,7 @@ c5.0cost <- train(statusClass ~ .,
                 metric = "negpre"
              )
 
-# save(c5.0cost, file ="/c50Cost5Trial1.RDS" )
+# save(c5.0cost, file ="./c50Cost5Trial1.RDS" )
 
 c5.0costpre <- predict(c5.0cost, testData[,-ncol(testData)])
 confusionMatrix(c5.0costpre, reference = testData[,ncol(testData)], positive = "Default")
@@ -237,7 +237,7 @@ impCoefglm <- train(statusClass ~.,
                     
                  ) 
 
-# save(impCoefglm, file = "/impCoefglm.RDS")
+# save(impCoefglm, file = "./impCoefglm.RDS")
 
 impCoefglmpre <- predict(impCoefglm, testData[,-ncol(testData)])
 
@@ -258,17 +258,17 @@ impCoefgbm <- train(statusClass ~.,
                         shrinkage = 0.1)
                 ) 
 
-# save(impCoefgbm, file = "/impCoefgbm.RDS")
+# save(impCoefgbm, file = "./impCoefgbm.RDS")
 
 impCoefgbmpre <- predict(impCoefgbm, testData[,-ncol(testData)])
 confusionMatrix(impCoefgbmpre, reference = testData[,ncol(testData)], positive = "Default")
 
 #Plot ROC ####
 
-load(file = "/impCoefsData.RDS")
-load(file ="/c50.RDS")
-load(file = "/impCoefglm.RDS")
-load(file = "/impCoefgbm.RDS")
+load(file = "./impCoefsData.RDS")
+load(file ="./c50.RDS")
+load(file = "./impCoefglm.RDS")
+load(file = "./impCoefgbm.RDS")
 
 set.seed(1337)
 trainIndex <- createDataPartition(impCoefsData$statusClass,
